@@ -1,19 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="container">
-        <div class="row justify-content-left">
-            {% for post in posts %}
-            <div class="col-lg-4 col-md-6">
-                <div class="card bg-dark text-light my-2" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">By {{ post.author }}</h6>
-                        <p class="card-text">{{ post.content }}</p>
-                        <span>On {{ post.date_posted }}</span>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
+            <th scope="col">From</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">To</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">P.U.</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pu in purchases %}
+            <tr>
+                {% set date = pu.date.split('-') %}
+                <th scope="row">{{ date[0] }}</th>
+                <td>{{ date[1] }}</td>
+                <td>{{ pu.from }}</td>
+                <td>{{ pu.quantity_from }}</td>
+                <td>{{ pu.to }}</td>
+                <td>{{ pu.quantity_to }}</td>
+                <td>{{ pu.PU }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock content %}
